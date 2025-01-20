@@ -4,7 +4,8 @@ import { StatusBar } from 'expo-status-bar';
 export default function Layout() {
   return <>
     <StatusBar style='light' />
-  <Stack
+    <Stack
+      initialRouteName='index'
       screenOptions={{
         headerStyle: {
           backgroundColor: '#f4511e',
@@ -13,8 +14,11 @@ export default function Layout() {
         headerTitleStyle: {
           fontWeight: 'bold',
         },
+        headerBackButtonMenuEnabled: true,
+        headerBackButtonDisplayMode: "minimal",
       }}>
-      {/* Optionally configure static options outside the route.*/}
-      <Stack.Screen name="home" options={{}} />
+      <Stack.Screen name="index" />
+      <Stack.Screen name="home" />
+      <Stack.Screen name="create" />
     </Stack></>
 }

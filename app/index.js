@@ -1,11 +1,12 @@
-import { ListItem } from '@rneui/themed';
-import { Stack } from 'expo-router';
+import { FAB, ListItem } from '@rneui/themed';
+import { Stack, useRouter } from 'expo-router';
 import { FlatList, View } from 'react-native';
 import useLaptops from '../hooks/useLaptops';
 
 export default function Home() {
 
-  const {laptops} = useLaptops()
+  const { laptops } = useLaptops()
+  const router = useRouter();
   return (
     <View>
       <Stack.Screen
@@ -16,8 +17,7 @@ export default function Home() {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-
-          headerTitle: 'Laptops'
+          headerTitle: 'Laptops',
         }}
       />
         <FlatList
@@ -34,7 +34,14 @@ export default function Home() {
               </ListItem.Content>
             </ListItem>
           }}
-        />
+      />
+      <FAB
+        icon={{ name: 'add', color: 'white' }}
+        color='#0af'
+        onPress={() => {
+          router.navigate('/create')
+        }}
+      />
     </View>
   );
 }
