@@ -48,11 +48,20 @@ export default function useLaptops() {
       setUpdateStatus(false)
     }
   }
+  const deleteLaptop = async (id) => {
+    const res = await fetch(`http://192.168.1.13:3000/laptops/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+  }
   return {
     laptops,
     createLaptop,
     status,
     updateLaptops,
-    updateStatus
+    updateStatus,
+    deleteLaptop
   }
 }

@@ -6,7 +6,7 @@ import useLaptops from '../hooks/useLaptops';
 
 export default function Create() {
 
-  const { createLaptop: laptopCreate, status, updateLaptops, updateStatus } = useLaptops()
+  const { createLaptop: laptopCreate, status, updateLaptops, updateStatus, deleteLaptop } = useLaptops()
   const [id, setId] = useState('')
   const [marca, setMarca] = useState('')
   const [procesador, setProcesador] = useState('')
@@ -32,6 +32,26 @@ export default function Create() {
       disco,
     }
     updateLaptops(id, data)
+  }
+  const handleDeleteLaptop = () => {
+    
+    Alert.alert('Elminar', 'Deseas eliminar la laptop?', [
+      {
+        text: 'Confirmar',
+        onPress: () => {
+          deleteLaptop(id)
+          router.back('home')
+        },
+        style: 'destructive',
+      },
+      {
+        text: 'Cancelr',
+        onPress: () => {
+          router.back('home')
+        },
+        style: 'cancel',
+      },
+    ])
   }
   useEffect(() => {
     console.warn(navigation.getState().routes[1].params);
@@ -130,10 +150,16 @@ export default function Create() {
           onPress={createLaptop}
         /> : <Button
           title={'Actualizar'}
-            onPress={handleUpdateLaptop}
+          onPress={handleUpdateLaptop}
         />
       }
-
+      {
+        !navigation.getState().routes[1].params.data.isNew &&
+        <Button
+          title={'Eliminar'}
+          onPress={handleDeleteLaptop}
+        />
+      }
     </View>
   );
 }
